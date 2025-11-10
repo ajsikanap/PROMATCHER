@@ -26,7 +26,7 @@ Scripts for simulating historical and trial datasets used in all scenarios.
 |------|--------------|
 | `00_generate_registry.R` | Generates the historical registry with nonlinear covariate–outcome structure. |
 | `01_generate_trial.R` | Simulates the randomized trial dataset from the same population. |
-| `02_simulation_parameters.R` | Defines global simulation constants (sample sizes, calipers, effect sizes, etc.). |
+| `02_power_calculations_formulas.R` | Uses formulas to assess target power, effect size and sample size, with analytical formulas. |
 
 ---
 
@@ -44,14 +44,16 @@ Each script outputs predicted **prognostic scores**, later used for subject pair
 
 ---
 
-### **2_pairing_and_randomization/**
-Implements the matching and allocation mechanism of ProMatcheR.
+### **2_functions/**
+Function used for the simulation when pairing and randomizations are perfomed.
 
 | File | Description |
 |------|--------------|
-| `form_pairs.R` | Forms subject pairs based on prognostic scores. |
-| `apply_calipers.R` | Applies distance thresholds (calipers = 0.01, 0.05, 0.10). |
-| `assign_treatment.R` | Randomly allocates treatment within each pair (1:1). |
+| `PROMATCHER_MC_function.R` | Function to perform Monte Carlo Simulations, that computes prognostic scores and matched subjects and computed benchmark simple randomization. |
+| `make_tbl_balance_function.R` | tbd |
+| `make_tbk_caliper_function.R` | tdb |
+| `split_results_function.R` | tdb |
+| `summary_results_function.R` | tdb |
 
 ---
 
@@ -60,12 +62,11 @@ Monte Carlo simulation study assessing operating characteristics.
 
 | File | Description |
 |------|--------------|
-| `sim_glm.R` | Simulation using GLM-based scores. |
+| `sim_glm.R` | Simulation using GLM-based scores, with varying sample sizes. |
 | `sim_rf.R` | Simulation using Random Forest–based scores. |
-| `sim_xgboost.R` | Simulation using XGBoost–based scores. |
+| `sim_xgboost.R` | Simulation using XGBoost–based scores, with varying sample sizes.|
 | `sim_superlearner.R` | Simulation using Super Learner ensemble scores. |
-| `sim_sensitivity_sample_size.R` | Varying sample sizes (n = 16–49). |
-| `sim_sensitivity_caliper.R` | Varying caliper thresholds to assess robustness. |
+
 
 > Each scenario is repeated up to **10,000 iterations** (1,000 for Super Learner) under both null and alternative hypotheses.
 
