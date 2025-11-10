@@ -1,7 +1,7 @@
 # Prognostic Score-Based Paired Randomization (PROMATCHER)
 
 ### Impact of Prognostic Score-Based Paired Randomization on the Operating Characteristics of Clinical Trials with Continuous Outcomes  
-**Authors:** Ajsi Kanapari, Giulia Lorenzoni, Dario Gregori  
+**Authors:** Ajsi Kanapari  
 **Affiliation:** Unit of Biostatistics, Epidemiology and Public Health, University of Padova  
 **Year:** 2025  
 **Status:** Not submitted yet.
