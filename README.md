@@ -1,106 +1,134 @@
-# Prognostic Score-Based Paired Randomization (PROMATCHER)
+#  Prognostic Score-Based Paired Randomization (ProMatcheR)
 
 ### Impact of Prognostic Score-Based Paired Randomization on the Operating Characteristics of Clinical Trials with Continuous Outcomes  
-**Authors:** Ajsi Kanapari  
+**Authors:** Ajsi Kanapari, Giulia Lorenzoni, Dario Gregori  
 **Affiliation:** Unit of Biostatistics, Epidemiology and Public Health, University of Padova  
 **Year:** 2025  
-**Status:** Not submitted yet.
 
 ---
 
-## Overview
+##  Overview
 
-This repository contains the R code for the simulation study presented in the paper above.  
-The project introduces **ProMatcheR**, a prognostic score–based **paired randomization design** aimed at increasing the statistical efficiency of clinical trials by leveraging **historical data and machine learning models** (GLM, Random Forest, XGBoost, Super Learner).
+This repository contains the full simulation code and case study implementation for the article:  
+**“Impact of Prognostic Score-Based Paired Randomization on the Operating Characteristics of Clinical Trials with Continuous Outcomes.”**
 
-Simulations quantify how model performance, caliper width, and analytical strategy affect **power** and **Type I error**, both under correct and misspecified models.
+The project introduces **ProMatcheR**, a prognostic score–based *paired randomization design* that integrates information from **historical data** through **machine learning models** (GLM, Random Forest, XGBoost, and Super Learner) to increase trial efficiency.  
+The study evaluates its effect on **statistical power**, **type I error**, and **variance reduction** under different model specifications and caliper choices.
 
 ---
 
-## Repository Structure
+## 🗂 Repository Structure
 
-### **01_ Registry and Data Generation**
+### **0_data_generation/**
+Scripts for simulating historical and trial datasets used in all scenarios.
+
 | File | Description |
 |------|--------------|
-| `01_generateRegistry_with_nonlinear_r.R` | Generates a historical registry with nonlinear covariate–outcome relationships. |
-| `03_RCT_dataset_generation.R` | Simulates the RCT dataset from the same population structure. |
+| `00_generate_registry.R` | Generates the historical registry with nonlinear covariate–outcome structure. |
+| `01_generate_trial.R` | Simulates the randomized trial dataset from the same population. |
+| `02_simulation_parameters.R` | Defines global simulation constants (sample sizes, calipers, effect sizes, etc.). |
 
 ---
 
-### **02_ Model Training (Prognostic Score Estimation)**
+### **1_model_training/**
+Training of prognostic models on historical data.
+
 | File | Description |
 |------|--------------|
-| `02_a_train_glm.R` | Fits Generalized Linear Models (baseline benchmark). |
-| `02_b_train_rf.R` | Fits Random Forest models. |
-| `02_c_train_xgboost.R` | Fits XGBoost models. |
-| `02_d_train_superlearner.R` | Combines all models using the Super Learner ensemble. |
+| `train_glm.R` | Fits Generalized Linear Models (baseline model). |
+| `train_rf.R` | Fits Random Forest models capturing nonlinear relationships. |
+| `train_xgboost.R` | Fits XGBoost gradient-boosted models. |
+| `train_superlearner.R` | Builds a Super Learner ensemble combining all models. |
 
-Each script outputs predicted **prognostic scores** used for subject matching in the simulated trials.
+Each script outputs predicted **prognostic scores**, later used for subject pairing.
 
 ---
 
-### **04_ Simulation Study (Main Scenarios)**
+### **2_pairing_and_randomization/**
+Implements the matching and allocation mechanism of ProMatcheR.
+
 | File | Description |
 |------|--------------|
-| `04_a_simulation_glm.R` | Simulation using GLM scores. |
-| `04_b_simulation_rf.R` | Simulation using Random Forest scores. |
-| `04_c_simulation_xgboost.R` | Simulation using XGBoost scores. |
-| `04_d_simulation_sl.R` | Simulation using Super Learner ensemble scores. |
-
-> Each scenario is repeated **10,000 times** (1,000 for Super Learner) to estimate **power** and **Type I error** under the null and alternative hypotheses.
+| `form_pairs.R` | Forms subject pairs based on prognostic scores. |
+| `apply_calipers.R` | Applies distance thresholds (calipers = 0.01, 0.05, 0.10). |
+| `assign_treatment.R` | Randomly allocates treatment within each pair (1:1). |
 
 ---
 
-### **05_ Summary Tables**
+### **3_simulations/**
+Monte Carlo simulation study assessing operating characteristics.
+
 | File | Description |
 |------|--------------|
-| `05_a_summary_tables_pw_typeI.R` | Aggregates results and computes power, Type I error, standard errors, and standardized mean differences (SMD). |
+| `sim_glm.R` | Simulation using GLM-based scores. |
+| `sim_rf.R` | Simulation using Random Forest–based scores. |
+| `sim_xgboost.R` | Simulation using XGBoost–based scores. |
+| `sim_superlearner.R` | Simulation using Super Learner ensemble scores. |
+| `sim_sensitivity_sample_size.R` | Varying sample sizes (n = 16–49). |
+| `sim_sensitivity_caliper.R` | Varying caliper thresholds to assess robustness. |
+
+> Each scenario is repeated up to **10,000 iterations** (1,000 for Super Learner) under both null and alternative hypotheses.
 
 ---
 
-### **06_ Sensitivity and Extended Simulations**
+### **4_analysis/**
+Post-simulation analytical scripts for summarizing results and deriving theoretical benchmarks.
+
 | File | Description |
 |------|--------------|
-| `06_a_simulation_glm_ss50.R` | Sensitivity with increased sample size (n=50). |
-| `06_b_simulation_rf_ss50.R` | Same as above for RF. |
-| `06_c_simulation_xgboost_ss50.R` | Same as above for XGBoost. |
-| `06_d_simulation_glm_xgboost_ss20_49.R` | Varying sample sizes (n=20–49). |
-| `06_tables_for_paper.R` | Produces final tables included in the manuscript. |
-
+| `summarize_results.R` | Aggregates Monte Carlo outputs into summary tables. |
+| `compute_power_typeI.R` | Calculates empirical power and type I error. |
+| `analytical_power_formula.R` | Implements the theoretical power and variance formulas. |
+| `compare_models.R` | Compares performance across ML algorithms and calipers. |
 
 ---
 
-### **07_ Auxiliary and Analytical Tools**
+### **5_visualization/**
+Publication-ready plotting scripts reproducing the figures from the paper.
+
 | File | Description |
 |------|--------------|
-| `08_h0_samplesize.R` | Analytical power and sample size computation for paired vs. unpaired designs. |
-| `20250806_continuous_output_paired_...R` | Implements variance and analytical power formulae. |
-
-
----
-
-## 📊 Output Summary
-
-The simulation script produces:
-- Power and Type I error estimates (per model, caliper, and analysis).  
-- Model performance metrics (R², RMSE, MAE).  
-- Data tables for manuscript inclusion (Tables 1–2).  
+| `plot_power_typeI.R` | Generates power and type I error bar plots (Figures 1–2). |
+| `plot_model_performance.R` | Visualizes R², RMSE, and model performance metrics. |
+| `plot_case_study.R` | Plots results from the real-data application. |
 
 ---
 
-## Reproducibility
+### **6_case_study/**
+Application of ProMatcheR to the twin WOMAC osteoarthritis trials.
 
-**Execution order:**
-1. `01_generateRegistry_with_nonlinear_r.R`  
-2. `03_RCT_dataset_generation.R`  
-3. `02_*_train_*.R`  
-4. `04_*_simulation_*.R`  
-5. `05_a_summary_tables_pw_typeI.R`  
-6. `06_*_simulation_*` + `06_tables_for_paper.R`  
-7. `07_a_plot_for_paper.R`  
-8. `08_h0_samplesize.R`
+| File | Description |
+|------|--------------|
+| `apply_promatcher_womac.R` | Applies prognostic-score pairing to the WOMAC data. |
+| `summarize_case_results.R` | Produces the re-analysis tables used in the paper (Table 2). |
 
-**Required R packages:**
+---
+
+### **7_utils/**
+Helper functions and support scripts.
+
+| File | Description |
+|------|--------------|
+| `helper_functions.R` | Core utility functions (e.g., performance metrics, matching helpers). |
+| `package_loading.R` | Loads required R packages and global options. |
+| `model_cleanup.R` | Clears model cache and temporary outputs. |
+
+---
+
+##  Execution Order
+
+1. `0_data_generation`  
+2. `1_model_training`  
+3. `2_pairing_and_randomization`  
+4. `3_simulations`  
+5. `4_analysis`  
+6. `5_visualization`  
+7. `6_case_study`
+
+---
+
+##  Required R Packages
+
 ```r
 library(tidyverse)
 library(caret)
@@ -108,4 +136,4 @@ library(SuperLearner)
 library(xgboost)
 library(randomForest)
 library(lme4)
-```
+
