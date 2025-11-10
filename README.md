@@ -17,7 +17,7 @@ Simulations quantify how model performance, caliper width, and analytical strate
 
 ---
 
-## 🗂 Repository Structure
+## Repository Structure
 
 ### **01_ Registry and Data Generation**
 | File | Description |
