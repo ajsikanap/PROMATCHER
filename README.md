@@ -24,9 +24,8 @@ Scripts for simulating historical and trial datasets used in all scenarios.
 
 | File | Description |
 |------|--------------|
-| `00_generate_registry.R` | Generates the historical registry with nonlinear covariate–outcome structure. |
-| `01_generate_trial.R` | Simulates the randomized trial dataset from the same population. |
-| `02_power_calculations_formulas.R` | Uses formulas to assess target power, effect size and sample size, with analytical formulas. |
+| `01_generate_registry.R` | Generates the historical registry with nonlinear covariate–outcome structure. |
+| `02_generate_trial.R` | Simulates the randomized trial dataset from the same population. |
 
 ---
 
@@ -72,27 +71,15 @@ Monte Carlo simulation study assessing operating characteristics.
 
 ---
 
-### **4_analysis/**
-Post-simulation analytical scripts for summarizing results and deriving theoretical benchmarks.
+### **4_analysis_and_visualization/**
+Post-simulation analytical scripts for summarizing results and deriving theoretical benchmarks, and publication-ready plotting scripts reproducing the figures from the paper.
 
 | File | Description |
 |------|--------------|
-| `summarize_results.R` | Aggregates Monte Carlo outputs into summary tables. |
-| `compute_power_typeI.R` | Calculates empirical power and type I error. |
-| `analytical_power_formula.R` | Implements the theoretical power and variance formulas. |
-| `compare_models.R` | Compares performance across ML algorithms and calipers. |
-
----
-
-### **5_visualization/**
-Publication-ready plotting scripts reproducing the figures from the paper.
-
-| File | Description |
-|------|--------------|
-| `plot_power_typeI.R` | Generates power and type I error bar plots (Figures 1–2). |
-| `plot_model_performance.R` | Visualizes R², RMSE, and model performance metrics. |
-| `plot_case_study.R` | Plots results from the real-data application. |
-
+| `41_analytical_power_formula.R` | Uses formulas to assess target power, effect size and sample size, with analytical formulas. |
+| `42_summarize_results_power_typeI.R` |  Calculates empirical power and type I error. |
+| `43_tables_for_paper.R` | Produces tables for paper. |
+| `44_figures_for_paper.R` | Produces figures for paper. |
 
 ---
 
@@ -102,9 +89,7 @@ Publication-ready plotting scripts reproducing the figures from the paper.
 2. `1_model_training`  
 3. `2_pairing_and_randomization`  
 4. `3_simulations`  
-5. `4_analysis`  
-6. `5_visualization`  
-7. `6_case_study`
+5. `4_analysis_and_visualization`  
 
 ---
 
@@ -117,4 +102,4 @@ library(SuperLearner)
 library(xgboost)
 library(randomForest)
 library(lme4)
-
+```
