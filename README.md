@@ -1,4 +1,4 @@
-#  Prognostic Score-Based Paired Randomization (ProMatcheR)
+#  Prognostic Score-Based Paired Randomization (PROMATCHER)
 
 ### Impact of Prognostic Score-Based Paired Randomization on the Operating Characteristics of Clinical Trials with Continuous Outcomes  
 **Authors:** Ajsi Kanapari, Giulia Lorenzoni, Dario Gregori  
@@ -93,26 +93,6 @@ Publication-ready plotting scripts reproducing the figures from the paper.
 | `plot_model_performance.R` | Visualizes R², RMSE, and model performance metrics. |
 | `plot_case_study.R` | Plots results from the real-data application. |
 
----
-
-### **6_case_study/**
-Application of ProMatcheR to the twin WOMAC osteoarthritis trials.
-
-| File | Description |
-|------|--------------|
-| `apply_promatcher_womac.R` | Applies prognostic-score pairing to the WOMAC data. |
-| `summarize_case_results.R` | Produces the re-analysis tables used in the paper (Table 2). |
-
----
-
-### **7_utils/**
-Helper functions and support scripts.
-
-| File | Description |
-|------|--------------|
-| `helper_functions.R` | Core utility functions (e.g., performance metrics, matching helpers). |
-| `package_loading.R` | Loads required R packages and global options. |
-| `model_cleanup.R` | Clears model cache and temporary outputs. |
 
 ---
 
