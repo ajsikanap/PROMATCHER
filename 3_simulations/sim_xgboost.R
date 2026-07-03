@@ -84,26 +84,8 @@ sim_output_xgboost_bad <- run_simulation(xgboost_model_bad, 300, 0.2, iteraction
 save(sim_output_xgboost, file = "output/sim_output_xgboost_N_300.rda")
 save(sim_output_xgboost_bad, file = "output/sim_output_xgboost_bad_N_300.rda")
 
-# ---------- Scenario 2: Small N (30, 40, 50), delta = 0.5 ----------
 
-list_mod_continuous_outcome <- list(xgboost_model)
-names(list_mod_continuous_outcome) <- c("xgboost_model")
-
-sim_output_xgboost_ss50 <- lapply(scenarios[[2]]$n, function(n) {
-  run_simulation(xgboost_model, n, scenarios[[2]]$delta, iteractions, scenarios[[2]]$caliper, "xgboost_model")
-})
-
-list_mod_continuous_outcome <- list(xgboost_model_bad)
-names(list_mod_continuous_outcome) <- c("xgboost_model")
-
-sim_output_xgboost_bad_ss50 <- lapply(scenarios[[2]]$n, function(n) {
-  run_simulation(xgboost_model_bad, n, scenarios[[2]]$delta, iteractions, scenarios[[2]]$caliper, "xgboost_model")
-})
-
-save(sim_output_xgboost_ss50, file = "output/sim_output_xgboost_N_50.rda")
-save(sim_output_xgboost_bad_ss50, file = "output/sim_output_xgboost_bad_N_50.rda")
-
-# ---------- Scenario 3: Varying Effect Sizes ----------
+# ---------- Scenario 2: Varying Effect Sizes ----------
 
 list_mod_continuous_outcome <- list(xgboost_model)
 names(list_mod_continuous_outcome) <- c("xgboost_model")

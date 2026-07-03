@@ -68,22 +68,3 @@ sim_output_rf_bad <- run_simulation(rf_model_bad, sample_size_large, 0.2, iterac
 save(sim_output_rf, file = "output/sim_output_rf_N_300.rda")
 save(sim_output_rf_bad, file = "output/sim_output_rf_bad_N_300.rda")
 
-#---------- Scenario 2: N = 30, 40, 50; delta = 0.5; caliper = 0.05 ----------
-  
-list_mod_continuous_outcome <- list(rf_model)
-names(list_mod_continuous_outcome) <- c("rf_model")
-
-sim_output_rf_ss50 <- lapply(sample_sizes_small, function(n) {
-  run_simulation(rf_model, n, 0.5, iteractions, 0.05, "rf_model")
-})
-
-list_mod_continuous_outcome <- list(rf_model_bad)
-names(list_mod_continuous_outcome) <- c("rf_model")
-
-sim_output_rf_bad_ss50 <- lapply(sample_sizes_small, function(n) {
-  run_simulation(rf_model_bad, n, 0.5, iteractions, 0.05, "rf_model")
-})
-
-# save
-save(sim_output_rf_ss50, file = "output/sim_output_rf_N_50.rda")
-save(sim_output_rf_bad_ss50, file = "output/sim_output_rf_bad_N_50.rda")

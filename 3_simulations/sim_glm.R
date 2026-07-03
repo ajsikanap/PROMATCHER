@@ -82,26 +82,8 @@ save(sim_output_glm, file = "output/sim_output_glm_N_300.rda")
 save(sim_output_glm_bad, file = "output/sim_output_glm_bad_N_300.rda")
 
 
-# ---------- Scenario 2: N = 30, 40, 50; delta = 0.5; caliper = 0.05 ----------
-list_mod_continuous_outcome <- list(glm_model)
-names(list_mod_continuous_outcome) <- c("glm_model")
 
-sim_output_glm_ss50 <- lapply(scenarios[[2]]$n, function(n) {
-  run_simulation(glm_model, n, scenarios[[2]]$delta, iteractions, scenarios[[2]]$caliper, "glm_model")
-})
-
-list_mod_continuous_outcome <- list(glm_model_bad)
-names(list_mod_continuous_outcome) <- c("glm_model")
-
-sim_output_glm_bad_ss50 <- lapply(scenarios[[2]]$n, function(n) {
-  run_simulation(glm_model_bad, n, scenarios[[2]]$delta, iteractions, scenarios[[2]]$caliper, "glm_model")
-})
-
-save(sim_output_glm_ss50, file = "output/sim_output_glm_N_50.rda")
-save(sim_output_glm_bad_ss50, file = "output/sim_output_glm_bad_N_50.rda")
-
-
-# ---------- Scenario 3: Varying N and Effect Size ----------
+# ---------- Scenario 2: Varying N and Effect Size ----------
 list_mod_continuous_outcome <- list(glm_model)
 names(list_mod_continuous_outcome) <- c("glm_model")
 
